@@ -1,0 +1,40 @@
+
+/*You are required to complete this function*/
+boolean is_k_pallin(string s,int k){
+//Your code here
+    String first = s;
+    String second = new StringBuffer(second).reverse().toString();
+    int editDistance = getEditDistance_(first, second);
+    return editDistance <= k*2 ? true: false;
+}
+
+
+private static int getEditDistance_(String first, String second) {
+    int m = first.length();
+    int n = second.length();
+    
+    int[][] dp = new int[m+1][n+1];
+    
+    for(int i = 0; i <=m ; i++){
+        for(int j = 0; j <=n ; j++){
+            if(i==0) {
+                dp[0][j] = j;
+                continue;
+            }
+            
+            if(j==0){
+                dp[i][j]  = i;
+                continue;
+            }
+            
+            if(first.charAt(i) != second.charAt(j)){
+                dp[i][j] = Math.min(dp[i-1][j],dp[i][j-1])+1;
+                continue;
+            }
+            
+            dp[i][j] = dp[i-1][j-1];
+        }
+    }
+    
+    return dp[m][n];
+}
