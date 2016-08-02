@@ -1,0 +1,4 @@
+Given a point P and N points find K points that are nearer to point P.
+
+1. A form of quicksort
+2. O(NlogK) Heap solution
