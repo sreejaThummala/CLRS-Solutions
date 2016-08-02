@@ -1,0 +1,20 @@
+/**
+You are given a set of consumers ( x - coordinates)
+You are given a set of producer ( (x,y) )
+Assume all the sets are sorted by x.
+Find for each consumer, its nearest producer.
+Needs an O(n) solution. linear in both producers and consumers 
+**/
+Iterate over producers. 
+Strategy # 1: 
+1. Simplify the problem.
+2. Remove the y coordinates.
+3. How to solve the problem if both are just x coordinates
+  1.1 Dequeue 
+        keep on popping the producers till we get one which is greater than consumer
+        compare it with just less and just greater - take which is nearer to it
+4. Add the second dimension to the producer coordinates
+  1.1 We cannot pop the producers based on just x coordinates
+      we need to queue the producers based on who is nearer to a X point at a time. 
+      1.1.1 This can be done by making sure in dequeue present element is not nearer to previous elements x coordinate than itself.
+  and use the above x coordinate algorithm.
