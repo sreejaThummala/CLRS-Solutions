@@ -1,0 +1,13 @@
+Bulk Synchronous Parallel Computing
+  Local computation
+  Process communication
+  Barrier synchronization
+
+BSP on Hadoop
+  BSP is different from Map reduce
+    Map reduce does not preserve data locality
+    BSP locality is preserved
+  Hadoop RPC is used for peer to peer communication
+  Zoo keeper is used to achieve barrier synchronization
+  
+    
