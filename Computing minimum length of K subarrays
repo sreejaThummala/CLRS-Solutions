@@ -1,0 +1,41 @@
+I Method
+Preprocessing
+Parition array into K blocks
+For each block we compute prefix and suffix of the block
+ - - O(k)
+ How to calculate minimum of k subarrays
+ A[x,x+k-1] o(1)
+ If x is a multiple of K we already have it 
+ If not, y=⌊(x/K)⌋-th block will contain the endpoint x, and (y+1)-th block will contain the endpoint (x+K−1). 
+ Hence, we can take the appropriate suffix of y-th block and prefix of (y+1)-th block and 
+ compute their minimum to compute the minimum of subarray A[x,x+K−1]
+ min(A[x,x+K−1])=min(min(A[x,(y+1)K−1]),min(A[(y+1)K,x+K−1]))
+
+II dequeue
+// B[i] will contain the minimum of subarray A[i, i + K - 1]
+B[1..N] = {INF};
+
+// deque, which will contain the potential candidate for minimum elements
+// of current and future windows.
+P = {};
+
+for (int i = 0; i < N; ++i) {
+  // Discard elements of the list larger than current element.
+  while (!P.empty() && P.back() > A[i])
+    P.pop_back();
+
+  // Add the new element.
+  P.push_back(A[i]);
+
+  // Remove the first element of the window,
+  // and from the list P as well, if it belongs there.
+  if (i >= K && A[i - K] == P.front()) {
+    P.pop_front();
+  }
+
+  // Set the minimum of the window
+  if (i >= (K - 1)) {
+    B[i - K + 1] = P.front();
+  }
+}
+.
