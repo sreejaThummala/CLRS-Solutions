@@ -19,29 +19,33 @@ class GFG {
 		        int u = in.nextInt();
 		        int v = in.nextInt();
 		        
+		        edges[u]++;
+		        edges[v]++;
 		        graph[u][v] = true;
 		        graph[v][u] = true;
 		    }
 		    
-		    System.out.println(getConnectingNodes(graph,n));
+		    System.out.println(getConnectingNodes(graph,edges,n));
 		}
 	}
 	
-	private static int getConnectingNodes(boolean[][] graph, int n)
+	private static int getConnectingNodes(boolean[][] graph, int[] edges,int n)
 	{
 	    Boolean[] visited  = new Boolean[n+1];
 	    
 	    Arrays.fill(visited, false);
+	    
 	    int sum = 0;
-	    for(int i = 1; i <= 2; i++){
+	    for(int i = 1; i <= n; i++){
 	                if(!visited[i]){
-	                    Integer[] componentEdges = new Integer[n+1];
-	                    Arrays.fill(componentEdges,0);
-	                    dfs(visited, graph,i, componentEdges,n);
+	                    Boolean[] component = new Boolean[n+1];
+	                    Arrays.fill(component,false);
+	                    dfs(visited, graph,i, edges,n, component);
 	                    
 	                    int[] evenOdd = new int[2];
 	                    for(int j = 1; j<=n; j++){
-	                        evenOdd[componentEdges[j]%2]++;
+	                        if(component[j])
+	                        evenOdd[edges[j]%2]++;
 	                    }
 	                    
 	                    sum += evenOdd[1];
@@ -57,18 +61,20 @@ class GFG {
 	    
 	}
 	
-	private static void dfs(Boolean[] visited, boolean[][] graph, int u, Integer[] componentEdges,
-	int n){
-	    
-	    if(visited[u]) return;
-	    
-	    for(int i = u+1; i <=n ; i++){
-	        if(graph[i][u]){
-	            dfs(visited, graph,i, componentEdges, n);
-	            componentEdges[i]++;
-	        }
-	    }
+	private static void dfs(Boolean[] visited, boolean[][] graph, int u, int[] edges,
+	int n, Boolean[] component){
+	 
+	    if(visited[u] || component[u]) return;
 	    
 	    visited[u] = true;
+	    component[u] = true;
+	    for(int i = 1; i <=n ; i++){
+	        if(graph[u][i]){
+	            if(!component[i])
+	            dfs(visited, graph,i, edges, n, component);
+	            component[i] = true;
+	            visited[i] = true;
+	        }
+	    }
 	}
 }
