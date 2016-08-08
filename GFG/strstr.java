@@ -9,17 +9,17 @@ public class Solution {
 	    //preprocess
 	    int n = haystack.length();
 	    int m = needle.length();
-	    int[] lps = new int[n+1];
+	    int[] lps = new int[m+1];
 	    
 	    lps[0] = 0;
 	    
 	    int j=0;
-	    for(int i = 1; i<n; i++){
-	        while(j>0 && haystack.charAt(i)!=haystack.charAt(j)){
+	    for(int i = 1; i<m; i++){
+	        while(j>0 && needle.charAt(i)!=needle.charAt(j)){
 	            j = lps[j-1];
 	        }
 	        
-	        if(haystack.charAt(i) == haystack.charAt(j))
+	        if(needle.charAt(i) == needle.charAt(j))
 	        j++;
 	        
 	        lps[i] = j;
@@ -35,6 +35,7 @@ public class Solution {
 	        
 	        if(haystack.charAt(i) == needle.charAt(j))
 	            j++;
+	            
 	       
 	       if(j==m){
 	           return i+1-j;
