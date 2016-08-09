@@ -31,6 +31,12 @@ public class Solution{
       }
       for(Pair p: cache) pq.offer(p);
     }
+    
+    String ans = "";
+    for(int i = 0; i < res.size(); i++){
+      ans += res.get(i);
+    }
+    return ans;
   }
 }
 
