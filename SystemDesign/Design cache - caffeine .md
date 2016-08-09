@@ -11,6 +11,8 @@ Yield high hit rates and excellent concurrency
 * Example
  * countmin sketch
     * uses a matrix of counters and multiple hash functions
-    *  addition of an entry increments a counter in each row
-    *  min of all entries is taken as frequency
+    * addition of an entry increments a counter in each row
+    * min of all entries is taken as frequency
+  * Window tinylfu
+    * 
  
