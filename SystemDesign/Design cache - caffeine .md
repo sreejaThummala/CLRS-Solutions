@@ -15,4 +15,6 @@ Yield high hit rates and excellent concurrency
     * min of all entries is taken as frequency
   * Window tinylfu
     * 
+ https://github.com/ben-manes/caffeine/wiki/Design
+
  
