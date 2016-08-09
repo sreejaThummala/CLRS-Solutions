@@ -3,8 +3,7 @@ public class Solution{
     if(k == 0) return str;
     int len = str.length();
     
-    StringBuffer res;
-    res.setLength(len);
+    ArrayList<Character> res = new ArrayList<Character>();
     
     int[] freq = new int[26];
     
@@ -21,7 +20,16 @@ public class Solution{
     while(!pq.isEmpty()){
       Set<Pair> cache = new HashSet<Pair>();
       int c = Math.min(k, len);
-      
+      for(int i = 0; i <c; i++){
+        if(pq.isEmpty()) return "";
+        Pair tmp = pq.poll();
+        res.add(tmp.e);
+        if(tmp.f>1){
+          cache.add(new Pair(tmp.f-1,tmp.e);
+        }
+        len--;
+      }
+      for(Pair p: cache) pq.offer(p);
     }
   }
 }
