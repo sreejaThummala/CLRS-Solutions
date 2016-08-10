@@ -1,14 +1,13 @@
 public class Solution{
   public boolean isPerfectSquare(int num){
   
-    if(num < 0) return false;
-    int left = 0;
-    int right = num;
+    long left = 1; //poisitve integer 
+    long right = num;
     
     while(left <= right){
-      int mid = left + (right - left) /2;
-      if(mid * mid == x) return true;
-      if(mid * mid < x) {
+      long mid = left + (right - left)/2; // mid*mid will be greater than Integer.MAX_VALUE when num is near Integer.MAX_VALUE
+      if(mid * mid == num) return true;
+      if(mid * mid < num) {
         left = mid + 1;
         continue;
       }
