@@ -1,7 +1,6 @@
-public class Solution{
-
-  public List<String> removeInvalidParantheses(String s){
-    List<String> res = new ArrayList<>();
+public class Solution {
+    public List<String> removeInvalidParentheses(String s) {
+            List<String> res = new ArrayList<>();
     if(s==null) return res;
     
       Set<String> visited = new HashSet<>();
@@ -34,5 +33,17 @@ public class Solution{
       }
       
       return res;
-  }
+        
+    }
+    
+    private boolean isValid(String s){
+        int cnt = 0;
+        for(int i = 0; i<s.length(); i++){
+            char c = s.charAt(i);
+            if(c == '(') cnt++;
+            if( c== ')' && cnt-- == 0) return false;
+        }
+        
+        return cnt == 0;
+    }
 }
