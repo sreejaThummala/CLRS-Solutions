@@ -11,7 +11,7 @@ public class Solution {
             }
             else{
                 min = Math.min(min, end-start); //no need for start boundary check
-                //end will always be less than start
+                //end will always be less than start - positive integers. that is why two pinters work
                 cur -= nums[start++];
             }
         }
