@@ -3,6 +3,13 @@
 * HAProxy can continue to operate in the presence of failed backend servers, handling crossover reliably and seamlessly. It also has built-in health checks that will remove a backend if it fails several health checks in a row. 
 * With dynamic routing you can transfer incoming traffic to a variety of backend servers, fully configurable with Access Control Lists (ACLs).
 
+
+#Elastic load balancer
+* It is a great tool for serving traffic across availability zones
+* It can handle any amount of traffic
+* No possibility to configure
+* So HAProxy is run behind ELB.
+
 #Reverse proxying
 * As a reverse proxy cache, Traffic Server serves requests on behalf of origin servers. 
 * Traffic Server is configured in such a way that it appears to clients like a normal origin server.
