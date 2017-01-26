@@ -1,0 +1,58 @@
+from fractions import gcd
+from math import factorial
+from itertools import combinations,permutations
+
+#provides cycle index
+def partitions(n, max_size=None):
+    if n == 0:
+        return [[]]
+    if not max_size:
+        max_size = n
+    partition_list = []
+    for i in range(max_size, 0, -1):
+        sub_partitions = partitions(n - i, min(i, n - i))
+        for sub_part in sub_partitions:
+            partition_list.append([i] + sub_part)
+    return partition_list
+    
+#get regular representation of the grou
+def partition_weight(p):
+    n = 0
+    counter_by_size = {}
+    for chunk in p:
+        n = n + chunk
+        if chunk not in counter_by_size:
+            counter_by_size[chunk] = 1
+        else:
+            counter_by_size[chunk] += 1
+
+    weight = factorial(n)
+
+    for i in counter_by_size:
+        j = counter_by_size[i]
+        weight //= (factorial(j) * (i ** j))
+
+    return weight
+# Main function. This uses the Polya enumeration theorem to count the number of binary n by n matrices that are distinct
+# under permutation of rows, permutation of columns
+def answer(w,h,s):
+    #get all the cycle partitions that sum to w
+    partition_row = partitions(w)
+    #get all the cycle partitions that sum to h
+    partition_column = partitions(h)
+
+    result = 0
+    for l in partition_row:
+        for m in partition_column:
+            x = 1
+            for c_r in l:
+                for c_c in m:
+                    x = x*(s**gcd(c_r, c_c))
+            result = result + x*partition_weight(l)*partition_weight(m)
+    divisor = factorial(w)*factorial(h)
+    result = result/divisor
+    return result
+
+                    
+            
+    
