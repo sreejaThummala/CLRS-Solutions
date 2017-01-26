@@ -33,8 +33,7 @@ def partition_weight(p):
         weight //= (factorial(j) * (i ** j))
 
     return weight
-# Main function. This uses the Polya enumeration theorem to count the number of binary n by n matrices that are distinct
-# under permutation of rows, permutation of columns
+
 def answer(w,h,s):
     #get all the cycle partitions that sum to w
     partition_row = partitions(w)
