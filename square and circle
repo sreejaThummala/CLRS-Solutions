@@ -1,0 +1,36 @@
+#!/bin/python
+
+import sys
+from math import sqrt
+
+w,h = raw_input().strip().split(' ')
+w,h = [int(w),int(h)]
+circleX,circleY,r = raw_input().strip().split(' ')
+circleX,circleY,r = [int(circleX),int(circleY),int(r)]
+x1,y1,x3,y3 = raw_input().strip().split(' ')
+x1,y1,x3,y3 = [int(x1),int(y1),int(x3),int(y3)]
+# your code goes here
+width, height = w, h
+a, b = circleX, circleY
+EPSILON = 0.5
+
+map_ = [['.' for x in range(width)] for y in range(height)]
+
+# draw the circle
+for y in range(height):
+    for x in range(width):
+        # see if we're close to (x-a)**2 + (y-b)**2 == r**2
+        if abs((x-a)**2 + (y-b)**2 ) <= EPSILON**2+r**2:
+            map_[y][x] = '#'
+
+h2square = sqrt((x1-x3)**2 + (y1-y3)**2)
+size = sqrt(((x1-x3)**2 + (y1-y3)**2)*0.5)
+for y in range(height):
+    for x in range(width):
+        if sqrt((x - x1)**2+(y-y1)**2)<= h2square+EPSILON  and  sqrt((x - x3)**2+(y-y3)**2)<= h2square+EPSILON:
+            map_[y][x] = '#'
+
+
+# print the map
+for line in map_:
+    print ''.join(line)
