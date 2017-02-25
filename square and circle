@@ -2,6 +2,12 @@
 
 import sys
 from math import sqrt
+from math import pow
+
+def areaOfTriangle(x1, y1, x2, y2, x3, y3):
+    return (abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / float(2)))
+def distance(x1, y1, x2, y2):
+    return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2))
 
 w,h = raw_input().strip().split(' ')
 w,h = [int(w),int(h)]
@@ -23,14 +29,29 @@ for y in range(height):
         if abs((x-a)**2 + (y-b)**2 ) <= EPSILON**2+r**2:
             map_[y][x] = '#'
 
-h2square = sqrt((x1-x3)**2 + (y1-y3)**2)
-size = sqrt(((x1-x3)**2 + (y1-y3)**2)*0.5)
+A = [x1,y1]
+B = [x3,y3]
+
 for y in range(height):
     for x in range(width):
-        if sqrt((x - x1)**2+(y-y1)**2)<= h2square+EPSILON  and  sqrt((x - x3)**2+(y-y3)**2)<= h2square+EPSILON:
-            map_[y][x] = '#'
+               xc = (x1 + x3) / float(2)
+               yc = (y1 + y3) / float(2)
+               xd = (x1 - x3) / float(2)
+               yd = (y1 - y3) / float(2)
+               x2 = xc - yd
+               y2 = yc + xd
+               x4 = xc + yd
+               y4 = yc - xd
+               triangleArea = areaOfTriangle(x, y, x1, y1, x2, y2)
+               triangleArea += areaOfTriangle(x, y, x2, y2, x3, y3)
+               triangleArea += areaOfTriangle(x, y, x3, y3, x4, y4)
+               triangleArea += areaOfTriangle(x, y, x1, y1, x4, y4)
+               squareArea = distance(x1, y1, x2, y2) * distance(x1, y1, x4, y4)
+               if triangleArea <= squareArea + EPSILON:
+                    map_[y][x] = '#'
 
 
 # print the map
 for line in map_:
     print ''.join(line)
+
