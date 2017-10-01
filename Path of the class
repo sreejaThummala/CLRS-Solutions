@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*;
+
+class Solution {
+  // plz refresh regularly
+  // Check for boundary
+  
+  static int[][] dp;
+  static int NCK(int n , int k) {
+  
+    if(k == 0 || k==n) return 1;
+     if(n < 0 || k < 0) return 0;
+    if(dp[n][k] !=0 ) return dp[n][k];
+
+    dp[n][k] = NCK(n-1,k)+ NCK(n-1,k-1);
+    return dp[n][k];
+  }
+  static int numOfPathsToDest(int n) {
+    // your code goes here
+    dp = new int[2*n+1][n+1];
+    return NCK(2*n-2,n-1) - NCK(2*n-2, n-2);
+   }
+  /**
+  //You’re testing a new driverless car that is located at the Southwest (bottom-left) corner of an n×n grid. 
+  //The car is supposed to get to the opposite, Northeast (top-right), corner of the grid. Given n, the size of the grid’s axes, write a function numOfPathsToDest that returns the number of the possible paths the driverless car can take.
+  **/
